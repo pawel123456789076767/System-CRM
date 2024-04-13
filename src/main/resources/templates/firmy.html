@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/stylee.css">
+    <title>Cystem CRM</title>
+    <header th:replace="~{fragments/header :: ShopHeader}"></header>
+
+    <title>Add Firmy</title>
+</head>
+<body>
+
+<h2>Add Firmy</h2>
+
+<form action="/firmy" method="post">
+    <label for="nazwafimry">Nazwa Firmy:</label>
+    <input type="text" id="nazwafimry" name="nazwafimry" required><br>
+
+    <label for="branza">Branża:</label>
+    <input type="text" id="branza" name="branza" required><br>
+
+    <label for="osobadecyzyjna">Osoba Decyzyjna:</label>
+    <input type="text" id="osobadecyzyjna" name="osobadecyzyjna" required><br>
+
+    <label for="telefon">Telefon:</label>
+    <input type="text" id="telefon" name="telefon" required><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
+
+    <label for="adres">Adres:</label>
+    <input type="text" id="adres" name="adres" required><br>
+
+
+    <input type="submit" value="Dodaj firme">
+</form>
+</body>
+</html>

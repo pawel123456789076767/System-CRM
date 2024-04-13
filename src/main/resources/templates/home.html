@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>System CRM</title>
+    <link rel="stylesheet" type="text/css" href="/css/styleee.css">
+</head>
+<body>
+<header th:replace="~{fragments/header :: ShopHeader}"></header>
+
+<div class="tile" onclick="window.location.href='/register'">
+    <img src="https://img.freepik.com/premium-wektory/dodaj-ikone-uzytkownika_791764-1807.jpg" alt="JA Image" id="jaImagsdsasddexdddd">
+    <p>Dodaj Przedstawiciela</p>
+</div>
+<div class="tile" onclick="window.location.href='/firmy'">
+    <img src="https://png.pngtree.com/png-vector/20231211/ourmid/pngtree-company-icon-house-png-image_10858583.png" alt="JA Image" id="jaImagasdasdexdd">
+    <p>Dodaj firme</p>
+</div>
+
+<div class="tile" onclick="window.location.href='/dodajzad'">
+    <img src="https://img.redro.pl/fototapety/ikona-umowy-umowa-i-podpis-pakt-accord-symbol-konwencji-plaski-vector-400-87933549.jpg" alt="Orange Image" id="orasdsaasdngeImageddd">
+    <p>Dodaj umowę</p>
+</div>
+
+<div class="tile" onclick="window.location.href='/kontrahent/all'">
+    <img src="https://media.istockphoto.com/id/880930138/pl/wektor/wy%C5%9Bwietl-ikon%C4%99-%C5%BAr%C3%B3d%C5%82a-strony.jpg?s=612x612&w=0&k=20&c=oV-v4hUv8MU9Fr3tKENGNs0sYjKaELj-NQNeeGJTTro=" alt="JA Image" id="jaImage">
+    <p>Wyświetl przedstawicieli handlowych</p>
+</div>
+
+<div class="tile" onclick="window.location.href='/wizyty'">
+    <img src="https://img.freepik.com/premium-wektory/dodaj-ikone-uzytkownika_791764-1807.jpg" alt="JA Image" id="jaImagsdssdfdexdddd">
+    <p>Dodaj spotkanie</p>
+</div>
+
+<div class="tile" onclick="window.location.href='/wizytyp/all'">
+    <img src="https://png.pngtree.com/png-vector/20190710/ourlarge/pngtree-business-deadline-icon-in-trendy-style-isolated-background-png-image_1540572.jpg" alt="JA Image" id="jaImagexdd">
+    <p>Spotkania</p>
+</div>
+
+<div class="tile" onclick="window.location.href='/firmyp/all'">
+    <img src="https://thumbs.dreamstime.com/z/ikony-budowania-wiersza-ikona-firmy-hotelarskie-budynki-miejskie-i-zestaw-wektor%C3%B3w-symboli-miast-architektura-miejska-167183230.jpg" alt="JA Image" id="jaImagasdfgdfgdasdexdd">
+    <p>Lista firm</p>
+</div>
+
+
+<style>
+        .tile {
+            display: inline-block;
+            text-align: center;
+            margin: 10px; /* Optional: Add some margin between tiles */
+        }
+
+        .tile img {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</body>
+</html>

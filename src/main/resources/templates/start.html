@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>System CRM</title>
+  <link rel="stylesheet" type="text/css" href="/css/styleeee.css">
+</head>
+<body>
+<header th:replace="~{fragments/header :: ShopHeader}"></header>
+<div class="tile-container">
+  <div class="tile" onclick="window.location.href='/dodajzad1'">
+    <img src="https://img.redro.pl/fototapety/ikona-umowy-umowa-i-podpis-pakt-accord-symbol-konwencji-plaski-vector-400-87933549.jpg" alt="Orange Image" id="orggangeImage">
+    <p>Dodaj umowę</p>
+  </div>
+  <div class="tile" onclick="window.location.href='/kontrahent/all'">
+    <img src="https://img.redro.pl/plakaty/podpisanie-umowy-ikona-700-147796304.jpg" alt="JA Image" id="jaImagexddd">
+    <p>Umowy</p>
+
+  </div>
+
+  <div class="tile" onclick="window.location.href='/register'">
+    <img src="https://img.freepik.com/premium-wektory/dodaj-ikone-uzytkownika_791764-1807.jpg" alt="JA Image" id="jaImagexdddd">
+    <p>Dodaj spotkanie</p>
+
+  </div>
+
+
+  <div class="tile" onclick="window.location.href='/wizytyp/all'">
+    <img src="https://png.pngtree.com/png-vector/20190710/ourlarge/pngtree-business-deadline-icon-in-trendy-style-isolated-background-png-image_1540572.jpg" alt="JA Image" id="jaImagexdd">
+    <p>Spotkania</p>
+
+  </div>
+  <a href="http://localhost:8080/">Logout</a>
+</div>
+
+
+
+</body>
+</html>

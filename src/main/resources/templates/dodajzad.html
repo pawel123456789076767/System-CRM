@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/stylee.css">
+    <title>Cystem CRM</title>
+    <header th:replace="~{fragments/header :: ShopHeader}"></header>
+
+    <!-- Dodajemy link do biblioteki jQuery UI -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- Dodajemy skrypt jQuery dla kalendarza -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            $("#opisZadania").datepicker(); // Inicjalizacja kalendarza dla pola tekstowego o id "opisZadania"
+
+             // Pobieranie referencji do pól formularza
+    var cenaField = document.getElementById('xd');
+    var iloscField = document.getElementById('xdd');
+    var kwotaUmowyField = document.getElementById('kwotaumowy');
+    var typUmowyField = document.getElementById('typumowy');
+
+    // Dodawanie nasłuchiwaczy na zdarzenia zmiany wartości pól
+    cenaField.addEventListener('input', updateKwotaUmowy);
+    iloscField.addEventListener('input', updateKwotaUmowy);
+    typUmowyField.addEventListener('change', updateKwotaUmowy);
+
+    // Funkcja do automatycznego obliczania i ustawiania kwoty umowy
+    function updateKwotaUmowy() {
+        var cena = parseFloat(cenaField.value) || 0;
+        var ilosc = parseInt(iloscField.value) || 0;
+        var kwotaUmowy = cena * ilosc;
+
+        // Sprawdzenie typu umowy i dodanie minusa, jeżeli to umowa sprzedaży
+        if (typUmowyField.value === 'Kupno') {
+            kwotaUmowy *= -1;
+        }
+
+        // Ustawienie wartości w polu Kwota umowy
+        kwotaUmowyField.value = kwotaUmowy.toFixed(0);
+    }
+});
+  $(document).ready(function() {
+        $('#user').change(function() {
+            // Pobierz wybrane ID użytkownika
+            var selectedUserId = $(this).val();
+
+            // Przypisz wybrane ID do pola xddd
+            $('#xddd').val(selectedUserId);
+        });
+    });
+    </script>
+
+</head>
+<body>
+<div class="form-container">
+    <form th:action="@{/dodajzad}" method="post" class="task-form">
+        <h2>Dodaj umowę</h2>
+        <label for="opisZadania">Data podpisania:</label>
+        <input type="text" id="opisZadania" name="opisZadania" required pattern="\d{2}/\d{2}/\d{4}">
+
+        <label for="produkt">Nazwa produktu:</label>
+        <input type="text" id="produkt" name="produkt" required>
+
+        <label for="xd">Cena jednostkowa produktu:</label>
+        <input type="text" id="xd" name="xd" required>
+
+        <label for="xdd">Ilosć(szt.):</label>
+        <input type="text" id="xdd" name="xdd" required>
+
+        <!-- Pole Kwota umowy jest ustawione jako readonly -->
+        <label for="kwotaumowy">Kwota umowy:</label>
+        <input type="text" id="kwotaumowy" name="kwotaumowy" readonly required>
+
+        <label for="typumowy">Typ umowy:</label>
+        <select id="typumowy" name="typumowy" required>
+            <option value="" disabled selected>Wybierz typ umowy</option>
+            <option value="Kupno">Kupno</option>
+            <option value="Sprzedaż">Sprzedaż</option>
+        </select>
+
+        <select id="user" name="user" required>
+            <option value="" disabled selected>Wybierz przectawiciela</option>
+            <!-- Iteracja po użytkownikach i dodanie opcji dla każdego z nich -->
+            <th:block th:each="user : ${users}">
+                <option th:value="${user.id}" th:text="${user.username}"></option>
+            </th:block>
+        </select>
+
+        <select id="firmy" name="firmy" required>
+            <option value="" disabled selected>Wybierz firme</option>
+            <!-- Iteracja po użytkownikach i dodanie opcji dla każdego z nich -->
+            <th:block th:each="firmy : ${firmy}">
+                <option th:value="${firmy.nazwafimry}" th:text="${firmy.nazwafimry}"></option>
+            </th:block>
+        </select>
+
+
+        <input type="hidden" id="xddd" name="xddd" />
+        <input type="submit" value="Dodaj umowę">
+    </form>
+</div>
+</body>
+</html>

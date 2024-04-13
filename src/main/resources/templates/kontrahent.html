@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>System CRM</title>
+  <link rel="stylesheet" type="text/css" href="/css/styleee.css">
+  <title>Przedstawiciele handlowi</title>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <style>
+    .sort-arrow {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-left: 5px;
+      vertical-align: middle;
+    }
+
+    .sort-arrow.asc {
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 5px solid #000;
+    }
+
+    .sort-arrow.desc {
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid #000;
+    }
+  </style>
+  <script>
+    function sortTable(columnIndex) {
+      var table, rows, switching, i, x, y, shouldSwitch, sortOrder, arrow;
+      table = document.querySelector("table");
+      switching = true;
+
+      // Ustawienie domyślnego kierunku sortowania
+      sortOrder = table.getAttribute("data-sort-order") === "asc" ? "desc" : "asc";
+
+      while (switching) {
+        switching = false;
+        rows = table.rows;
+
+        for (i = 1; i < (rows.length - 1); i++) {
+          shouldSwitch = false;
+
+          x = parseFloat(rows[i].cells[columnIndex].innerText.replace(',', ''));
+          y = parseFloat(rows[i + 1].cells[columnIndex].innerText.replace(',', ''));
+
+          if (sortOrder === "asc") {
+            if (x > y) {
+              shouldSwitch = true;
+              break;
+            }
+          } else {
+            if (x < y) {
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+
+        if (shouldSwitch) {
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+        }
+      }
+
+      // Zaktualizuj atrybut sortowania
+      table.setAttribute("data-sort-order", sortOrder);
+
+      // Zaktualizuj strzałkę
+      arrow = document.querySelector("#sort-arrow-" + columnIndex);
+      arrow.className = sortOrder === "asc" ? "sort-arrow asc" : "sort-arrow desc";
+    }
+
+    $(document).ready(function () {
+      // Sortowanie po kliknięciu na nagłówek "Kwota umów"
+      $("#sort-kwota-umow").click(function () {
+        sortTable(5);
+      });
+
+      // Sortowanie po kliknięciu na nagłówek "Suma umów"
+      $("#sort-suma-umow").click(function () {
+        sortTable(7);
+      });
+    });
+  </script>
+</head>
+<body>
+<h2>Przedstawiciele handlowi</h2>
+<table border="1" data-sort-order="asc">
+  <thead>
+  <tr>
+    <th>Imię</th>
+    <th>Nazwisko</th>
+    <th>Email</th>
+    <th>Telefon</th>
+    <th>Data spotkań</th>
+    <th id="sort-kwota-umow">Kwota umów<span id="sort-arrow-5" class="sort-arrow"></span></th>
+    <th>Typ umowy</th>
+    <th id="sort-suma-umow">Suma umów<span id="sort-arrow-7" class="sort-arrow"></span></th>
+    <th>Firma</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="user : ${users}">
+    <td th:text="${user.username}"></td>
+    <td th:text="${user.nazwisko}"></td>
+    <td th:text="${user.email}"></td>
+    <td th:text="${user.telefon}"></td>
+    <td>
+      <ul th:each="zadanie : ${user.zadania}">
+        <li>
+          <span th:text="${zadanie.opisZadania}"></span>
+        </li>
+      </ul>
+    </td>
+    <td>
+      <ul th:each="zadanie : ${user.zadania}">
+        <li>
+          <span th:text="${zadanie.kwotaumowy}"></span>
+        </li>
+      </ul>
+    </td>
+    <td>
+      <ul th:each="zadanie : ${user.zadania}">
+        <li>
+          <span th:text="${zadanie.typumowy}"></span>
+        </li>
+      </ul>
+    </td>
+    <td>
+      <ul th:each="zadanie, iterStat : ${user.zadania}">
+        <li th:if="${iterStat.index == 0}">
+          <span th:text="${zadanie.sumaumowy}"></span>
+        </li>
+      </ul>
+    </td>
+    <td>
+      <ul th:each="zadanie : ${user.zadania}">
+        <li>
+          <span th:text="${zadanie.firmy}"></span>
+        </li>
+      </ul>
+    </td>
+  </tbody>
+</table>
+</body>
+</html>

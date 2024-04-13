@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>System CRM</title>
+    <link rel="stylesheet" type="text/css" href="/css/styleee.css">
+</head>
+<body>
+<header th:replace="fragments/header :: ShopHeader"></header>
+
+
+<form action="/register" method="post" onsubmit="return validateForm()">
+    <h2>Dodaj przectawiciela handlowego</h2>
+    <label for="username">Imię:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="nazwisko">Nazwisko:</label>
+    <input type="text" id="nazwisko" name="nazwisko" required>
+
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" >
+
+    <label for="telefon">Telefon:</label>
+    <input type="text" id="telefon" name="telefon" required>
+
+    <div class="error" id="error-message"></div>
+
+    <input type="submit" value="Dalej">
+</form>
+
+
+</body>
+</html>

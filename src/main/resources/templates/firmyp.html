@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>System CRM</title>
+    <link rel="stylesheet" type="text/css" href="/css/styleee.css">
+    <title>Lista Firm</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Lista Firm</h2>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nazwa Firmy</th>
+        <th>Branża</th>
+        <th>Osoba Decyzyjna</th>
+        <th>Telefon</th>
+        <th>Email</th>
+        <th>Adres</th>
+    </tr>
+
+    <!-- Iteracja po firmach i wyświetlanie danych w tabeli -->
+    <tr th:each="firmy : ${firmy}">
+        <td th:text="${firmy.id}"></td>
+        <td th:text="${firmy.nazwafimry}"></td>
+        <td th:text="${firmy.branza}"></td>
+        <td th:text="${firmy.osobadecyzyjna}"></td>
+        <td th:text="${firmy.telefon}"></td>
+        <td th:text="${firmy.email}"></td>
+        <td th:text="${firmy.adres}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

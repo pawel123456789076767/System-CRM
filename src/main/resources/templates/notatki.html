@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Notatki</title>
+</head>
+<body>
+
+<link rel="stylesheet" type="text/css" href="/css/stylee.css">
+<header th:replace="~{fragments/header :: ShopHeader}"></header>
+
+
+
+
+        <form action="/notatki" method="post" onsubmit="return validateForm()">
+            <h2>Notatki</h2>
+
+            <label for="dataUtworzenia">Data Utworzenia:</label>
+            <!-- Dodane pole na datę z atrybutem readonly -->
+            <input type="text" id="dataUtworzenia" name="dataUtworzenia" readonly><br>
+
+
+            <label for="tresc">Treść:</label>
+        <input type="text" id="tresc" name="tresc" required><br>
+
+
+            <select id="nazwaKontrahenta" name="nazwaKontrahenta" required>
+                <option value="" disabled selected>Wybierz kontrahenta</option>
+                <!-- Iteracja po użytkownikach i dodanie opcji dla każdego z nich -->
+                <th:block th:each="user : ${users}">
+                    <option th:value="${user.username}" th:text="${user.username}"></option>
+                </th:block>
+            </select>
+
+            <input type="submit" value="Zapisz notatke">
+    </form>
+
+<script>
+    // Funkcja do ustawienia aktualnej daty w polu formularza
+    function ustawAktualnaDate() {
+        var currentDate = new Date();
+        var day = currentDate.getDate();
+        var month = currentDate.getMonth() + 1; // Month is zero-based
+        var year = currentDate.getFullYear();
+
+        // Format daty: YYYY-MM-DD (analogicznie do HTML5 input type="date")
+        var formattedDate = year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+
+        document.getElementById("dataUtworzenia").value = formattedDate;
+    }
+
+    // Wywołanie funkcji przy załadowaniu strony
+    window.onload = function() {
+        ustawAktualnaDate();
+    };
+</script>
+
+
+</body>
+</html>
